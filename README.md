@@ -36,3 +36,4 @@
 
 *UML deployment diagrama:*
 
+![alt text](https://github.com/Donadai/Travel-social-media/blob/main/uml-deployment-diagram.png?raw=true)
