@@ -25,7 +25,7 @@
 *Projekto realizacijai pasirinktas MERN stack.*
 
 * *MongoDB - duomenų bazė.*
-* *Express.js - tarpinė programinė įranga.*
+* *Express.js - galinė žiniatinklio programų sistema, skirta kurti RESTful API su Node.js.*
 * *React.js - front-end JavaScript biblioteka.*
 * *Node.js - back-end JavaScript vykdymo aplinka.*
 
