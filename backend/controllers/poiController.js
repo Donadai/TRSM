@@ -1,11 +1,12 @@
 const asyncHandler = require('express-async-handler')
 const POI = require('../models/poiModel')
+const ROI = require('../models/roiModel')
 
 // @desc    Get all points of interest
 // @route   GET /api/pois
 // @access  Private
 const getPois = asyncHandler(async (req, res) => {
-    const pois = await POI.find().populate('roi')
+    const pois = await POI.find().populate( { path: 'roi', populate: { path: 'country'} })
 
     if(!pois){
         res.status(400)
@@ -19,7 +20,7 @@ const getPois = asyncHandler(async (req, res) => {
 // @route   GET /api/pois/:id
 // @access  Private
 const getPoi = asyncHandler(async (req, res) => {
-    const poi = await POI.findById(req.params.id).populate('roi')
+    const poi = await POI.findById(req.params.id).populate( { path: 'roi', populate: { path: 'country'} })
 
     if(!poi){
         res.status(400)
@@ -55,7 +56,7 @@ const updatePoi = asyncHandler(async (req, res) => {
 
     const updatedPOI = await POI.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
-    }).populate('roi')
+    })
 
     res.status(200).json(updatedPOI)
 })
@@ -76,10 +77,27 @@ const deletePoi = asyncHandler(async (req, res) => {
     res.status(200).json({id: req.params.id})
 })
 
+// @desc    Get points of interest by country
+// @route   GET api/:countryid/pois
+// @access  Private
+const getPoisByCountry = asyncHandler(async (req, res) => {
+    const countryId = req.params.countryid
+    const rois = await ROI.find({ country: countryId })
+    const pois = await POI.find({roi: rois}).populate( { path: 'roi', populate: { path: 'country'} })
+
+    if(!pois){
+        res.status(400)
+        throw new Error('Points of interest not found')
+    }
+
+    res.status(200).json(pois)
+})
+
 module.exports = {
     getPois,
     getPoi,
     createPoi, 
     updatePoi, 
     deletePoi,
+    getPoisByCountry
 }

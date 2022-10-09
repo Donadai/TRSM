@@ -8,6 +8,9 @@ const port = process.env.PORT
 const countryRoutes = require('./routes/countryRoutes')
 const roiRoutes = require('./routes/roiRoutes')
 const poiRoutes = require('./routes/poiRoutes')
+const postRoutes = require('./routes/postRoutes')
+const userRoutes = require('./routes/userRoutes')
+const commentRoutes = require('./routes/commentRoutes')
 
 connectDB()
 
@@ -20,6 +23,9 @@ app.use(express.urlencoded({extended: false}))
 app.use('/api', countryRoutes)
 app.use('/api', roiRoutes)
 app.use('/api', poiRoutes)
+app.use('/api', postRoutes)
+app.use('/api', userRoutes)
+app.use('/api', commentRoutes)
 
 app.use(errorHandler)
 

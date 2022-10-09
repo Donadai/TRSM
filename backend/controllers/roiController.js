@@ -29,24 +29,7 @@ const getRoi = asyncHandler(async (req, res) => {
     res.status(200).json(roi)
 })
 
-// @desc    Get region of interests by country
-// @route   GET api/:countryid/rois
-// @access  Private
-const getRoiByCountry = asyncHandler(async (req, res) => {
-    const countryId = req.params.countryid
-    console.log(countryId)
-    const rois = await ROI.find({country: countryId}).populate('country')
-
-    if(!rois){
-        res.status(400)
-        throw new Error('Region of interest not found')
-    }
-
-    res.status(200).json(rois)
-})
-
 module.exports = {
     getRois,
-    getRoi,
-    getRoiByCountry
+    getRoi
 }
