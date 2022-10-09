@@ -1,12 +1,15 @@
 const express = require('express')
+const {ROI} = require("../models/roiModel")
 const router = express.Router()
-const { getPois, 
-    setPoi, 
+
+const { getPois,
+    getPoi,
+    createPoi, 
     updatePoi, 
     deletePoi, 
 } = require ('../controllers/poiController')
 
-router.route('/').get(getPois).post(setPoi)
-router.route('/:id').put(updatePoi).delete(deletePoi)
+router.route('/pois').get(getPois).post(createPoi)
+router.route('/pois/:id').get(getPoi).put(updatePoi).delete(deletePoi)
 
 module.exports = router

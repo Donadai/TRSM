@@ -1,28 +1,43 @@
 const asyncHandler = require('express-async-handler')
-
 const POI = require('../models/poiModel')
 
-// @desc    Get points of interest
+// @desc    Get all points of interest
 // @route   GET /api/pois
 // @access  Private
 const getPois = asyncHandler(async (req, res) => {
-    const pois = await POI.find()
+    const pois = await POI.find().populate('roi')
+
+    if(!pois){
+        res.status(400)
+        throw new Error('Points of interest not found')
+    }
 
     res.status(200).json(pois)
 })
 
-// @desc    Set point of interest
-// @route   POST /api/pois
+// @desc    Get point of interest by id
+// @route   GET /api/pois/:id
 // @access  Private
-const setPoi = asyncHandler(async (req, res) => {
-    if (!req.body.text){
+const getPoi = asyncHandler(async (req, res) => {
+    const poi = await POI.findById(req.params.id).populate('roi')
+
+    if(!poi){
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Point of interest not found')
     }
 
-    const poi = await POI.create({
-        text: req.body.text,
-    })
+    res.status(200).json(poi)
+})
+
+// @desc    Create point of interest
+// @route   POST /api/pois
+// @access  Private
+const createPoi = asyncHandler(async (req, res) => {
+    if (!req.body){
+        res.status(400)
+        throw new Error('Please add values')
+    }
+    const poi = await POI.create(req.body)
 
     res.status(200).json(poi)
 })
@@ -35,12 +50,12 @@ const updatePoi = asyncHandler(async (req, res) => {
 
     if(!poi){
         res.status(400)
-        throw new Error('POI not found')
+        throw new Error('Point of interest not found')
     }
 
     const updatedPOI = await POI.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
-    })
+    }).populate('roi')
 
     res.status(200).json(updatedPOI)
 })
@@ -53,7 +68,7 @@ const deletePoi = asyncHandler(async (req, res) => {
 
     if(!poi){
         res.status(400)
-        throw new Error('POI not found')
+        throw new Error('Point of interest not found')
     }
 
     await poi.remove()
@@ -62,8 +77,9 @@ const deletePoi = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getPois, 
-    setPoi, 
+    getPois,
+    getPoi,
+    createPoi, 
     updatePoi, 
     deletePoi,
 }

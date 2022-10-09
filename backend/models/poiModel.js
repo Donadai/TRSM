@@ -2,15 +2,12 @@ const mongoose = require('mongoose')
 
 const poiSchema = mongoose.Schema(
     {
-        text: {
-            type: String,
-            required: [true, 'Please add a text value'],
-        },
+        name: { type: String, required: true, unique: true },
+        roi: { type: mongoose.Types.ObjectId, ref:"Roi", required: true},
+        description:  { type: String },
     },
-    
     {
-        timestamps: true,
+        timestamps: true
     }
 )
-
-module.exports = mongoose.model('POI', poiSchema)
+module.exports = mongoose.model('Poi', poiSchema)
