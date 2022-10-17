@@ -7,26 +7,25 @@ const ROI = require('../models/roiModel')
 const getRois = asyncHandler(async (req, res) => {
     const rois = await ROI.find().populate('country')
 
-    if(!rois){
-        res.status(400)
-        throw new Error('No regions of interest found')
-    }
-
-    res.status(200).json(rois)
+    if(!rois) { res.status(400).send('No regions of interest found') }
+    else { res.status(200).json(rois) } 
 })
 
 // @desc    Get region of interest by id
 // @route   GET api/rois/:id
 // @access  Private
 const getRoi = asyncHandler(async (req, res) => {
-    const roi = await ROI.findById(req.params.id).populate('country')
-
-    if(!roi){
-        res.status(400)
-        throw new Error('Region of interest not found')
+    try {
+        const roi = await ROI.findById(req.params.id).populate('country')
+        if(!roi){
+            res.status(400).send('Region of interest not found')
+        } else {
+            res.status(200).json(roi)
+        }     
+    } catch (error) {
+        res.status(400).json(error)
     }
 
-    res.status(200).json(roi)
 })
 
 module.exports = {

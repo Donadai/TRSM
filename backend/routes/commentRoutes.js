@@ -6,11 +6,11 @@ const { getComments,
     createComment, 
     updateComment, 
     deleteComment, 
-    getCommentsOnUserPosts
+    getUserComments
 } = require ('../controllers/commentController')
 
-router.route('/comments').get(getComments).post(createComment)
-router.route('/comments/:id').get(getComment).put(updateComment).delete(deleteComment)
-router.route('/:userid/comments').get(getCommentsOnUserPosts)
+router.route('/users/:userid/posts/:postid/comments').get(getComments).post(createComment)
+router.route('/users/:userid/posts/:postid/comments/:id').get(getComment).put(updateComment).delete(deleteComment)
+router.route('/users/:userid/comments').get(getUserComments)
 
 module.exports = router

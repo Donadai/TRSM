@@ -8,7 +8,7 @@ const { getPosts,
     deletePost, 
 } = require ('../controllers/postController')
 
-router.route('/posts').get(getPosts).post(createPost)
-router.route('/posts/:id').get(getPost).put(updatePost).delete(deletePost)
+router.route('/users/:userid/posts').get(getPosts).post(createPost)
+router.route('/users/:userid/posts/:id').get(getPost).put(updatePost).delete(deletePost)
 
 module.exports = router
