@@ -35,11 +35,15 @@ const getPoi = asyncHandler(async (req, res) => {
 // @route   POST /api/pois
 // @access  Private
 const createPoi = asyncHandler(async (req, res) => {
-    try {
-        const poi = await POI.create(req.body)
-        res.status(200).json(poi)
-    } catch (error) {
-        res.status(400).json(error)
+    if (req.role == 'MOD') {
+        try {
+            const poi = await POI.create(req.body)
+            res.status(200).json(poi)
+        } catch (error) {
+            res.status(400).json(error)
+        }
+    } else {
+        res.status(401).send('Unauthorized')
     }
 })
 
@@ -47,18 +51,22 @@ const createPoi = asyncHandler(async (req, res) => {
 // @route   UPDATE /api/pois/:id
 // @access  Private
 const updatePoi = asyncHandler(async (req, res) => {
-    try {
-        const poi = await POI.findById(req.params.id)
-        if(!poi){
-            res.status(400).send('Point of interest not found')
-        } else {
-            const updatedPOI = await POI.findByIdAndUpdate(req.params.id, req.body, {
-                new: true,
-            })
-            res.status(200).json(updatedPOI)
+    if (req.role == 'MOD') {
+        try {
+            const poi = await POI.findById(req.params.id)
+            if(!poi){
+                res.status(400).send('Point of interest not found')
+            } else {
+                const updatedPOI = await POI.findByIdAndUpdate(req.params.id, req.body, {
+                    new: true,
+                })
+                res.status(200).json(updatedPOI)
+            }
+        } catch (error){
+            res.status(400).json(error)
         }
-    } catch (error){
-        res.status(400).json(error)
+    } else {
+        res.status(401).send('Unauthorized')
     }
 })
 
@@ -66,16 +74,20 @@ const updatePoi = asyncHandler(async (req, res) => {
 // @route   DELETE /api/pois/:id
 // @access  Private
 const deletePoi = asyncHandler(async (req, res) => {
-    try {
-        const poi = await POI.findById(req.params.id)
-        if(!poi){
-            res.status(400).send('Point of interest not found')
-        } else {
-            await poi.remove()
-            res.status(200).json({id: req.params.id})
+    if (req.role == 'MOD') {
+        try {
+            const poi = await POI.findById(req.params.id)
+            if(!poi){
+                res.status(400).send('Point of interest not found')
+            } else {
+                await poi.remove()
+                res.status(200).json({id: req.params.id})
+            }
+        } catch (error) {
+            res.status(400).json(error)
         }
-    } catch (error) {
-        res.status(400).json(error)
+    } else {
+        res.status(401).send('Unauthorized')
     }
 })
 

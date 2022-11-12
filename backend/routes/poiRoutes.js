@@ -9,8 +9,15 @@ const { getPois,
     getPoisByCountry
 } = require ('../controllers/poiController')
 
-router.route('/pois').get(getPois).post(createPoi)
-router.route('/pois/:id').get(getPoi).put(updatePoi).delete(deletePoi)
+const { protect } = require('../middleware/authMiddleware')
+
+router.get('/pois', getPois)
+router.get('/pois/:id', getPoi)
+
+router.post('/pois', protect, createPoi)
+router.put('/pois/:id', protect, updatePoi)
+router.delete('/pois/:id', protect, deletePoi)
+
 router.route('/:countryid/pois').get(getPoisByCountry)
 
 module.exports = router

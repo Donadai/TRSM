@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
         display_name: { type: String, required: true },
         email: { type: String, required: true },
         profile_image: { type: String },
+        role: { type: String, enum: ['USER', 'ADMIN', 'MOD'] , required: true }
     },
     {
         timestamps: true
