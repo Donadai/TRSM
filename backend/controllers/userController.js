@@ -33,7 +33,7 @@ const getUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const createUser = asyncHandler(async (req, res) => {
-    const { username, password, display_name, email, role } = req.body;
+    const { username, password, display_name, email } = req.body;
 
     // Check if user exists
     const usernameExists = await User.findOne({username})
@@ -48,7 +48,7 @@ const createUser = asyncHandler(async (req, res) => {
 
         try {
             const user = await User.create({
-                username, password: hashedPassword, display_name, email, role
+                username, password: hashedPassword, display_name, email
             })
             res.status(200).json({user: user, token: generateToken(user.id, user.role)})
         } catch (error) {
