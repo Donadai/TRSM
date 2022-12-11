@@ -19,6 +19,19 @@ const getPosts = asyncHandler(async (req, res) => {
     }
 })
 
+const getPostsByPoi = asyncHandler(async (req, res) => {
+    try {
+        const poi = await POI.findById(req.params.poiid)
+        if (!poi) { res.status(400).send('Point of interest not found') }
+        else {
+            const posts = await (await Post.find({ poi: poi })).reverse()
+            res.status(200).json(posts)
+        }
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 // @desc    Get post by id
 // @route   GET /api/users/:userid/posts/:id
 // @access  Private
@@ -119,5 +132,6 @@ module.exports = {
     getPost,
     createPost, 
     updatePost, 
-    deletePost
+    deletePost,
+    getPostsByPoi,
 }

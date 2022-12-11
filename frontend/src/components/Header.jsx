@@ -21,11 +21,27 @@ function Header() {
             </div>
             <ul>
                 {user ? (
-                    <li>
-                        <button className='btn' onClick={onLogout}>
-                            <FaSignOutAlt /> Logout
-                        </button>
-                    </li>) : (
+                    <>
+                        <ul className='menu'>
+                            <li>
+                                <Link to='/pois'>
+                                    POIS
+                                </Link>                            
+                            </li>
+                            <li>
+                                <Link to='/myposts'>
+                                    My posts
+                                </Link>                            
+                            </li>
+                        </ul>
+
+                        <li>
+                            <button className='btn' onClick={onLogout}>
+                                <FaSignOutAlt /> Logout
+                            </button>
+                        </li>
+                    </>
+                    ) : (
                     <>
                         <li>
                             <Link to='/login'>
@@ -38,7 +54,6 @@ function Header() {
                             </Link>
                         </li>
                     </>)}
-
             </ul>
         </header>
     )

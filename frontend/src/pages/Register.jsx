@@ -5,17 +5,19 @@ import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
 import {register, reset} from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import axios from 'axios'
 
 function Register() {
   const [formData, setFormData] = useState({
     email: '',
     username: '',
     display_name: '',
+    profile_image: null,
     password: '',
     password2: ''
   })
 
-  const {email, username, display_name, password, password2} = formData
+  const {email, username, display_name, profile_image, password, password2} = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -55,6 +57,10 @@ function Register() {
     }
   }
 
+  const fileSelectedHandler = e => {
+    setFormData({profile_image: e.target.files[0].name})
+  }
+
   if (isLoading) {
     return <Spinner />
   }
@@ -80,13 +86,16 @@ function Register() {
         <input type="text" className="form-control" id="display_name" name="display_name" value={display_name} placeholder='Enter display name' onChange={onChange}/>
         </div>
         <div className="form-group">
+        <input type="file" className="form-control" id="profile_image" name="profile_image" value={profile_image} placeholder='Upload profile image' onChange={fileSelectedHandler}/>
+        </div>
+        <div className="form-group">
         <input type="password" className="form-control" id="password" name="password" value={password} placeholder='Enter password' onChange={onChange}/>
         </div>
         <div className="form-group">
         <input type="password" className="form-control" id="password2" name="password2" value={password2} placeholder='Confirm password' onChange={onChange}/>
         </div>
         <div className="form-group">
-          <button type="submit" className='btn btn-block'>Submit</button>
+          <button type="submit" className='btn btn-block'>Register</button>
         </div>
       </form>
     </section>

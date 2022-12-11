@@ -1,14 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+.poiContent {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.poiContent .image {
+  flex-basis: 40%;
+}
+
+.poiContent .text  {
+  font-size:0.9rem;
+  padding-left:20px;
+  width:50%;
+}
+
+.poiContent img {
+  max-width: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
+  /* background-image: linear-gradient(to right, rgb(25, 97, 230) , rgb(0, 193, 252)); */
 }
 
 a {
@@ -41,7 +63,9 @@ h3 {
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+  
 }
+
 
 .header {
   display: flex;
@@ -50,6 +74,7 @@ h3 {
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 60px;
+  
 }
 
 .header ul {
@@ -59,7 +84,7 @@ h3 {
 }
 
 .header ul li {
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .header ul li a {
@@ -86,27 +111,58 @@ h3 {
   color: #828282;
 }
 
+.searchInputs {
+  display: flex;
+}
+
+.searchIcon {
+  height: 100%;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
+
+.searchResults {
+  height: 100px;
+  width: 50%;
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.searchResults::-webkit-scrollbar {
+  display:none;
+}
+
+.searchResults .searchItem {
+  width:100%;
+  height:auto;
+  display: flex;
+  align-items: center;
+  color: black;
+  background-color: white;
+  border-style: none;
+  font-size: 15px;
+}
+.searchResults .searchItem p {
+  margin-left: 10px;
+
+}
+
+.searchItem:hover {
+  background-color: lightgrey;
+}
+
 .goals {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-.goal {
-  background-color: #f4f4f4;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}
 
-.goal .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
 
 .form,
 .content {
@@ -114,11 +170,13 @@ h3 {
   margin: 0 auto;
 }
 
+
 .form-group {
   margin-bottom: 10px;
 }
 
 .form-group input,
+.form-group datalist,
 .form-group textarea,
 .form-group select {
   width: 100%;
@@ -141,8 +199,24 @@ h3 {
   border-radius: 5px;
   background: #000;
   color: #fff;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-grn {
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  background: rgb(6, 87, 153);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
   appearance: button;

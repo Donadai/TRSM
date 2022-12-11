@@ -27,10 +27,17 @@ const logout = () => {
     localStorage.removeItem('user')
 }
 
+// Find user
+const findUser = async (userid) => {
+    const response = await axios.get(API_URL + userid.toString())
+    return response.data
+}
+
 const authService = {
     register,
     logout,
     login,
+    findUser
 }
 
 export default authService

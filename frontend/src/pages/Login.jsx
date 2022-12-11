@@ -12,7 +12,7 @@ function Login() {
     password: '',
   })
 
-  const {email, username, display_name, password, password2} = formData
+  const {username, password} = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -65,7 +65,7 @@ function Login() {
     <section className="form">
       <form onSubmit={onSubmit}>
         <div className="form-group">
-        <input type="text" className="form-control" id="username" name="username" value={username} placeholder='Enter username' onChange={onChange}/>
+        <input type="text" className="form-control" id="username" name="username" value={username} placeholder='Enter username or email' onChange={onChange}/>
         </div>
         <div className="form-group">
         <input type="password" className="form-control" id="password" name="password" value={password} placeholder='Enter password' onChange={onChange}/>
