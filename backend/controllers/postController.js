@@ -19,6 +19,15 @@ const getPosts = asyncHandler(async (req, res) => {
     }
 })
 
+const getAllPosts = asyncHandler(async (req, res) => {
+    try {
+        const posts = await Post.find()
+        res.status(200).json(posts)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 const getPostsByPoi = asyncHandler(async (req, res) => {
     try {
         const poi = await POI.findById(req.params.poiid)
@@ -133,5 +142,5 @@ module.exports = {
     createPost, 
     updatePost, 
     deletePost,
-    getPostsByPoi,
+    getAllPosts,
 }

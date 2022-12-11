@@ -1,15 +1,35 @@
-import Poi from "./Poi";
 
-function Post({poi}) {
-    console.log(poi);
+import {useEffect, useState} from 'react'
+import axios from 'axios'
+import Spinner from './Spinner'
+
+function Post({post}) {
+
+    const [postUser, setPostUser] = useState({})
+
+    const getUser = () => {
+        axios.get(`/api/users/${post.user}`)
+        .then((response) => {
+            const user = response.data
+            setPostUser(user)
+        })
+        .catch(error => console.error(`Error: ${error}`))
+    }
+    
+    useEffect(() => {
+        getUser()
+    }, [])
+
+    if (!postUser) {return <Spinner />}
+
     return (
         <>
-            <div className='poiContent'>
-                <div className='image'>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/House_of_Perk%C5%ABnas%2C_Kaunas%2C_Lithuania_-_Diliff.jpg/800px-House_of_Perk%C5%ABnas%2C_Kaunas%2C_Lithuania_-_Diliff.jpg" alt="alternatetext"/>
+            <div className='goal'>
+                <div className='postUser'>
+                    <h4>{postUser.display_name}</h4>
                 </div>        
                 <div className= 'text'>
-                    {poi.description}
+                {post.description}
                 </div>
 
             </div>
@@ -17,4 +37,4 @@ function Post({poi}) {
     )
 }
 
-export default Poi
+export default Post

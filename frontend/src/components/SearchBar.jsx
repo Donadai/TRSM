@@ -29,7 +29,7 @@ function SearchBar({placeholder, data, selectData}) {
                 </div>
                 <div className="form-group">
                     <datalist id='searchData'>
-                        {filteredData.map((data) => <option>{data.name}</option>)}
+                        {filteredData.map((data) => <option key={data._id}>{data.name}</option>)}
                     </datalist>
                 </div>
             </div>

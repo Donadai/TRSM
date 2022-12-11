@@ -2,7 +2,7 @@ import Spinner from "./Spinner"
 
 function Poi({poi}) {
 
-    if (poi !== null)
+    if (poi.image !== null)
     {
         return (
             <>

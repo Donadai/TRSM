@@ -42,6 +42,11 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     await authService.logout()
 })
 
+// Find user
+export const findUser = createAsyncThunk('auth/findUser', async (userid, thunkAPI) => {
+    await authService.findUser()
+})
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,

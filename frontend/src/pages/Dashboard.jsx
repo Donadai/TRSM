@@ -2,9 +2,10 @@ import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getPois } from '../features/pois/poiSlice'
-import { getRecentPosts } from '../features/posts/postSlice'
+import { getAllPosts } from '../features/posts/postSlice'
 import SearchBar from '../components/SearchBar'
 import Poi from '../components/Poi'
+import Post from '../components/Post'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -14,14 +15,27 @@ function Dashboard() {
   const {pois} = useSelector((state) => state.pois)
   const {posts} = useSelector((state) => state.posts)
 
-  const [poi, setPoi] = useState({})
+  const [poi, setPoi] = useState({poi : null})
+  const [isPoiFound, setFoundPoi] = useState(Boolean)
+  const [foundPosts, setFoundPosts] = useState([{}])
+  const [arePostsFound, setAreFoundPosts] = useState(Boolean)
 
   const handlePoi = poiName => {
-    const poi = pois.find(poi => {
-      return poi.name === poiName
+    const foundPoi = pois.find(p => {
+      return p.name === poiName
     });
-    setPoi(poi)
-    dispatch(getRecentPosts(poi._id))
+    if (foundPoi) {
+      setPoi(foundPoi)
+      setFoundPoi(true)
+
+      const foundP = posts.filter(post => {
+        return (post.poi === foundPoi._id);
+      })
+      if (foundP.length > 0) {  
+        setFoundPosts(foundP)
+        setAreFoundPosts(true)      
+      }    
+    }
   }
 
   useEffect(() => {
@@ -30,6 +44,7 @@ function Dashboard() {
     }
 
     dispatch(getPois())
+    dispatch(getAllPosts())
   }, [user, navigate, dispatch])
 
   return (
@@ -44,14 +59,14 @@ function Dashboard() {
           <SearchBar placeholder='Enter point of interest...' data={pois} selectData={handlePoi}/>
         </div>
         <div>
-          {poi && (
-            <Poi poi = {poi}/>
-          )} 
+          {isPoiFound ? <Poi poi={poi}/> : null}               
         </div>
         <div>
           <h1>Some recent posts..</h1>
+          {arePostsFound ? foundPosts.map((post) => (
+            <Post key={post._id} post={post}/>
+          )) : null}
         </div>
-
       </section>
     </>
   )

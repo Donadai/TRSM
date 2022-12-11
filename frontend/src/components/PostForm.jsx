@@ -8,7 +8,7 @@ import Spinner from './Spinner'
 function PostForm() {
     const dispatch = useDispatch()
 
-    const [text, setText] = useState('')
+    const [description, setDescription] = useState('')
     const {user} = useSelector((state) => state.auth)
     const {pois} = useSelector((state) => state.pois)
 
@@ -30,7 +30,7 @@ function PostForm() {
                 <div className="form-group">
                     <h1>New post</h1>
                     <SearchBar placeholder='Enter point of interest...' data={pois}/>
-                    {/* <input type='text' name='text' id='text' value={text} onChange={(e) => setText(e.target.value)} />          */}
+                    {<textarea type='text' name='description' id='description' placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)} />}
                 </div>
                 <div className="form-group">
                     <button className="btn btn-block" type='submit'>

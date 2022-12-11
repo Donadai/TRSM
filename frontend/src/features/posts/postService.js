@@ -1,14 +1,13 @@
 import axios from 'axios'
 
-// Get 15 recent posts by poi
-const getRecentPoiPosts = async (poiid) => {
-    const response = await axios.get('api/pois/' + poiid.toString() + '/posts')
+const getAllPosts = async () => {
+    const response = await axios.get('api/posts/')
 
     return response.data
 }
 
 const postService = {
-    getRecentPoiPosts,
+    getAllPosts,
 }
 
 export default postService
