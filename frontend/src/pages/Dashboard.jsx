@@ -58,7 +58,7 @@ function Dashboard() {
           <h1>Find a point of interest</h1>
           <SearchBar placeholder='Enter point of interest...' data={pois} selectData={handlePoi}/>
         </div>
-        <div>
+        <div className='goal'>
           {isPoiFound ? <Poi poi={poi}/> : null}               
         </div>
         <div>
