@@ -1,11 +1,7 @@
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin, FaReact } from 'react-icons/fa'
-import {Link, useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 function Footer() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-
     return (
         <footer className='footer'>
             <ul>

@@ -7,7 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MyPosts from './pages/MyPosts';
-
+import Comments from './pages/Comments';
+import Pois from './pages/Pois';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/myposts' element={<MyPosts />} />
+          <Route path='/pois' element={<Pois />} />
+          <Route path='/posts/:postid/comments' element={<Comments />} />
         </Routes>
         <Footer/>
       </div>

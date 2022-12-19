@@ -14,7 +14,7 @@ const getPostComments = asyncHandler(async (req, res) => {
             const post = await Post.findById(req.params.postid)
             if (!post) { res.status(400).send('Post not found') }
             else {
-                const comments = await Comment.find({ post: post })
+                const comments = await Comment.find({ post: post }).populate(['user'])
                 res.status(200).json(comments)
             }
         }

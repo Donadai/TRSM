@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import { getPois } from '../features/pois/poiSlice'
-import { getAllPosts } from '../features/posts/postSlice'
+import { getPois, reset } from '../features/pois/poiSlice'
+import { getAllPosts, resetposts } from '../features/posts/postSlice'
 import SearchBar from '../components/SearchBar'
 import Poi from '../components/Poi'
-import Post from '../components/Post'
+import PostSlider from '../components/PostSlider'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ function Dashboard() {
 
   const [poi, setPoi] = useState({poi : null})
   const [isPoiFound, setFoundPoi] = useState(Boolean)
-  const [foundPosts, setFoundPosts] = useState([{}])
+  const [foundPosts, setFoundPosts] = useState([])
   const [arePostsFound, setAreFoundPosts] = useState(Boolean)
 
   const handlePoi = poiName => {
@@ -27,9 +27,10 @@ function Dashboard() {
     if (foundPoi) {
       setPoi(foundPoi)
       setFoundPoi(true)
-
+      setFoundPosts([])
+      
       const foundP = posts.filter(post => {
-        return (post.poi === foundPoi._id);
+        return (post.poi._id === foundPoi._id);
       })
       if (foundP.length > 0) {  
         setFoundPosts(foundP)
@@ -45,7 +46,14 @@ function Dashboard() {
 
     dispatch(getPois())
     dispatch(getAllPosts())
+
+    return () => {
+      dispatch(resetposts())
+      dispatch(reset())
+    }
+
   }, [user, navigate, dispatch])
+
 
   return (
     <>
@@ -58,14 +66,12 @@ function Dashboard() {
           <h1>Find a point of interest</h1>
           <SearchBar placeholder='Enter point of interest...' data={pois} selectData={handlePoi}/>
         </div>
-        <div className='goal'>
+        <div className='poi'>
           {isPoiFound ? <Poi poi={poi}/> : null}               
         </div>
-        <div>
-          <h1>Some recent posts..</h1>
-          {arePostsFound ? foundPosts.map((post) => (
-            <Post key={post._id} post={post}/>
-          )) : null}
+        <h1>Some recent posts..</h1>
+        <div className='posts'>       
+          {arePostsFound && (<PostSlider posts={foundPosts}/>)}
         </div>
       </section>
     </>

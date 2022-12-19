@@ -19,9 +19,18 @@ const getPosts = asyncHandler(async (req, res) => {
     }
 })
 
+const getPostById = asyncHandler(async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.postid)
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 const getAllPosts = asyncHandler(async (req, res) => {
     try {
-        const posts = await Post.find()
+        const posts = await Post.find().populate(['poi', 'user'])
         res.status(200).json(posts)
     } catch (error) {
         res.status(400).json(error)
@@ -138,6 +147,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
 module.exports = {
     getPosts,
+    getPostById,
     getPost,
     createPost, 
     updatePost, 
