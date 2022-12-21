@@ -4,30 +4,44 @@
 
 ### Sistemos paskirtis
 
-*Sistema skirta entuziastingiems keliautojams, norintiems dalintis savo kelionių patirtimi, palikti atsiliepimus apie įvairias pasaulio lokacijas, bei atrasti, sekti ir susisiekti su bendraminčiais.*
+*Sistema skirta entuziastingiems keliautojams, norintiems dalintis savo kelionių patirtimi, palikti atsiliepimus apie įvairias pasaulio lokacijas, bei atrasti, sekti ir susisiekti su bendraminčiais.
+
+Asmuo, norėdamas naudotis šia platforma prisiregistruos prie internetinės aplikacijos ir galės kurit įrašus apie aplankytas vietas, juos valdyti, peržiūrėti kitų žmonių įrašus, juos komentuoti.
+*
 
 ### Funkciniai reikalavimai
 
+Neregistruotas sistemos naudotojas galės:
 
-* *bent 3 taikomosios srities objektai tarpusavyje susieti prasminiu ir hierarchiniu ryšiu (pvz.: namas<-aukštas<-butas).*
-* *bent 5 sąsajos (API) metodai (4 CRUD metodai ir 1 metodas grąžinantis sąrašą) kiekvienam taikomosios srities objektui.*
-* *bent 1 iš realizuotų sąsajos (API) metodas turi būti hierarchinis, pvz.: grąžinti visus konkretaus namo butus.*
-* *bent 3 rolės (pvz.: svečias, narys, administratorius).*
-* *Programinis sprendimas turi naudoti duomenų bazę.*
-* *Projektas turi būti realizuotas taikant REST principus.*
-* *Turi būti realizuota autentifikacija ir autorizacija naudojant OAUTH2 arba JWT (naudojant JWT pasirinkti tinkamą žetonų atnaujinimo strategiją).*
-* *Parengta grafinė naudotojo sąsaja (GUI).*
-* *Realizuotas produktas turi būti pasiekiamas saityne, tam panaudojant debesų technologijas.*
+  1. Užsiregistruoti internetinėje aplikacijoje.
+  2. Prisijungti prie internetinės aplikacijos.
+  
+Registruotas sistemos naudotojas galės:
+  1. Atsijungti nuo aplikacijos.
+  2. Prisijungti prie aplikacijos.
+  3. Sukurti post'ą:
+    3.1. Pasirinkti POI (point of interest).
+    3.2. Pridėti aprašymą.
+    3.3. Pridėti nuotrauką.
+  4. Redaguoti post'ą.
+  5. Pašalinti postą.
+  6. Komentuoti kitų naudotojų post'us.
 
+Administratorius galės:
+  1. Šalinti naudotojus.
+  2. Pakeisti naudotojo rolę.
+  
+Moderatorius galės:
+  1. Sukurti POI (point of interest).
+  2. Pašalinti naudotojų post'us
+  3. Pašalinti naudotojų komentarus.
 
 ## Pasirinktų technologijų aprašymas
 
 *Projekto realizacijai pasirinktas MERN stack.*
 
-* *MongoDB - duomenų bazė.*
-* *Express.js - galinė žiniatinklio programų sistema, skirta kurti RESTful API su Node.js.*
-* *React.js - front-end JavaScript biblioteka.*
-* *Node.js - back-end JavaScript vykdymo aplinka.*
+*Kliento pusė (ang. Front-End) - React.js*
+*Serverio pusė (ang. Back-End) - Express.js, Node.js, MongoDB*
 
 * *JWT - autentifikacija.*
 * *Azure - tinklapio talpinimas debesyje.*
