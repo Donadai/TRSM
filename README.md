@@ -19,10 +19,7 @@ Neregistruotas sistemos naudotojas galės:
 Registruotas sistemos naudotojas galės:
   1. Atsijungti nuo aplikacijos.
   2. Prisijungti prie aplikacijos.
-  3. Sukurti post'ą:
-    3.1. Pasirinkti POI (point of interest).
-    3.2. Pridėti aprašymą.
-    3.3. Pridėti nuotrauką.
+  3. Sukurti post'ą: pasirinkti POI (point of interest), pridėti aprašymą, pridėti nuotrauką.
   4. Redaguoti post'ą.
   5. Pašalinti postą.
   6. Komentuoti kitų naudotojų post'us.
