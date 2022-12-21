@@ -4,10 +4,10 @@
 
 ### Sistemos paskirtis
 
-*Sistema skirta entuziastingiems keliautojams, norintiems dalintis savo kelionių patirtimi, palikti atsiliepimus apie įvairias pasaulio lokacijas, bei atrasti, sekti ir susisiekti su bendraminčiais.
+Sistema skirta entuziastingiems keliautojams, norintiems dalintis savo kelionių patirtimi, palikti atsiliepimus apie įvairias pasaulio lokacijas, bei atrasti, sekti ir susisiekti su bendraminčiais.
 
 Asmuo, norėdamas naudotis šia platforma prisiregistruos prie internetinės aplikacijos ir galės kurit įrašus apie aplankytas vietas, juos valdyti, peržiūrėti kitų žmonių įrašus, juos komentuoti.
-*
+
 
 ### Funkciniai reikalavimai
 
